@@ -1,4 +1,5 @@
 import { getTrends } from "./services.js";
+import renderCard from "./renderCard.js";
 
 const filmWeek = document.querySelector('.film-week');
 // console.log('filmWeek: ', filmWeek);
@@ -28,7 +29,12 @@ const renderVideo = async () => {
     const data = await getTrends();
     // console.log('data: ', data);
 
-    firstRender(data.results[0]);
+    const [firstCard, ...otherCard] = data.results;
+    otherCard.length = 12;
+    //  console.log('otherCard: ', otherCard);
+
+    firstRender(firstCard);
+    renderCard(otherCard);
 
 }
 
